@@ -11,6 +11,10 @@ import javax.swing.SwingConstants;
 public class Calculator implements ActionListener {
 	
 	boolean isOperatorClicked = false;
+	boolean isAddOp = false;
+	boolean isSubOp = false;
+	boolean isMulOp = false;
+	boolean isDivOp = false;
 	
 	String oldValue;
 	String newValue;
@@ -34,6 +38,10 @@ public class Calculator implements ActionListener {
 	JButton minusButton;
 	JButton plusButton;
 	JButton equalButton;
+	
+	Float result;
+	Float oldValueF;
+	Float newValueF;
 	
 	
 	public Calculator() {
@@ -140,7 +148,7 @@ public class Calculator implements ActionListener {
 						divButton.addActionListener(this);
 						jf.add(divButton);
 						
-						mulButton = new JButton("x");
+						mulButton = new JButton("*");
 						mulButton.setBounds(330, 230, 80, 80);
 						mulButton.setFont(new Font("Arial", Font.PLAIN, 40));
 						mulButton.addActionListener(this);
@@ -250,28 +258,59 @@ public class Calculator implements ActionListener {
 			displayLabel.setText("");
 		}
 		else if(e.getSource() == equalButton) {
-			newValue = displayLabel.getText();
-			Float oldValueF = Float.parseFloat(oldValue);
-			Float newValueF = Float.parseFloat(newValue);
 			
-			Float result = oldValueF+newValueF;
-			
-			displayLabel.setText(result+"");
-//			isOperatorClicked = false;
+			if(isAddOp) {
+				newValue = displayLabel.getText();
+				Float oldValueF = Float.parseFloat(oldValue);
+				Float newValueF = Float.parseFloat(newValue);
+				
+				Float result = oldValueF + newValueF;
+				isAddOp = false;
+				displayLabel.setText(result+"");
+				
+			}else if(isSubOp) {
+				newValue = displayLabel.getText();
+				Float oldValueF = Float.parseFloat(oldValue);
+				Float newValueF = Float.parseFloat(newValue);
+				
+				Float result = oldValueF - newValueF;
+				isSubOp = false;
+				displayLabel.setText(result+"");
+			}else if(isMulOp) {
+				newValue = displayLabel.getText();
+				Float oldValueF = Float.parseFloat(oldValue);
+				Float newValueF = Float.parseFloat(newValue);
+				
+				Float result = oldValueF * newValueF;
+				isMulOp = false;
+				displayLabel.setText(result+"");
+			}else if(isDivOp) {
+				newValue = displayLabel.getText();
+				Float oldValueF = Float.parseFloat(oldValue);
+				Float newValueF = Float.parseFloat(newValue);
+				
+				Float result = oldValueF / newValueF;
+				isDivOp = false;
+				displayLabel.setText(result+"");
+			}
 		}
 		else if(e.getSource() == plusButton){
 			isOperatorClicked = true;
 			oldValue = displayLabel.getText();
+			isAddOp = true;
 		}
 		else if(e.getSource() == minusButton){
 			isOperatorClicked = true;
 			oldValue = displayLabel.getText();
+			isSubOp = true;
 		}else if(e.getSource() == mulButton){
 			isOperatorClicked = true;
 			oldValue = displayLabel.getText();
+			isMulOp = true;
 		}else if(e.getSource() == divButton){
 			isOperatorClicked = true;
 			oldValue = displayLabel.getText();
+			isDivOp = true;
 		}
 		
 		
